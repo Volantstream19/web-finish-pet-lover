@@ -34,18 +34,18 @@ petForm.addEventListener('submit', async (e) => {
     const imagePath = `pets/${randomFolder}/${imageFile.name}`;
     // > Part A: Call upload image with the bucket ("images"),
     // the imagePath, and the imageFile - and store the returned url
-    const URL = await uploadImage('images', imagePath, imageFile);
+    const url = await uploadImage('images', imagePath, imageFile);
 
     const pet = {
         // > Part B: add the name, bio, and image_url fields to the pet object
         name: formData.get('name'),
         bio: formData.get('bio'),
-        image_url: URL,
+        image_url: url,
     };
 
     // > Part B:
     //    - call function to create the pet in the database
-    const response = await createPet();
+    const response = await createPet(pet);
     //    - store the error and pets state from the response
     error = response.error;
     //    - either display the error or redirect the user to the home page

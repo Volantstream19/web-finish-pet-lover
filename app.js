@@ -3,6 +3,7 @@
 import './auth/user.js';
 // > Part C: import fetch to get pets
 import { renderPet } from './render-utils.js';
+import { getPets } from './fetch-utils.js';
 
 /* Get DOM Elements */
 const petList = document.getElementById('pet-list');
@@ -16,9 +17,12 @@ let pets = [];
 window.addEventListener('load', async () => {
     // > Part C:
     //    - get the pets
+    const response = await getPets();
     //    - store the error and pets state from the response
-    //    - either display the error or the pets
+    error = response.error;
+    pets = response.data;
 
+    //    - either display the error or the pets
     if (error) {
         displayError();
     }
